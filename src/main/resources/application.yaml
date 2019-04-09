@@ -1,0 +1,31 @@
+spring:
+  profiles:
+    active: dev
+
+# "---"でプロファイルを区切る
+# プロファイル名はspring.profilesに書く
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost/devdb
+    username: db_user
+    password: db_password
+server:
+  port: 8082
+logging:
+  level:
+    org:
+      springframework: INFO
+---
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://production.com:3306/productdb
+    username: db_user
+    password: db_password
+server:
+  port: 8082
+logging:
+  level:
+    org.springframework.web: INFO
