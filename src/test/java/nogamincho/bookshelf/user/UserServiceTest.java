@@ -1,6 +1,8 @@
 package nogamincho.bookshelf.user;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import nogamincho.bookshelf.test.TestBookShelfConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -9,21 +11,28 @@ import static org.mockito.Mockito.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
 
 @ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = { TestBookShelfConfig.class })
+@SpringBootTest
 public class UserServiceTest {
 
 	private static final Logger LOG = LoggerFactory.getLogger(UserServiceTest.class.getName());
 
-	@Mock
+	@MockBean
 	UserRepository userRepository;
 
-	@InjectMocks
-	UserService userService = new UserService();
+	@Autowired
+	UserService userService;
 
 	@Test
 	void findUser() {
